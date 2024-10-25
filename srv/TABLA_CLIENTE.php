@@ -1,0 +1,8 @@
+<?php
+
+const CLIENTE = "CLIENTE";
+const CLI_ID = "CLI_ID";
+const CLI_NOMBRE = "CLI_NOMBRE";
+const CLI_EMAIL = "CLI_EMAIL";
+const CLI_TELEFONO = "CLI_TELEFONO";
+const CLI_DIRECCION = "CLI_DIRECCION";

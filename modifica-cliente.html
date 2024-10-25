@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Modificar Cliente</title>
+
+    <script type="module" src="lib/js/consumeJson.js"></script>
+    <script type="module" src="lib/js/submitForm.js"></script>
+    <script type="module" src="lib/js/muestraObjeto.js"></script>
+    <script type="module" src="lib/js/muestraError.js"></script>
+
+    <script>
+        const params = new URL(location.href).searchParams;
+    </script>
+
+</head>
+
+<body onload="if (params.size > 0) {
+   consumeJson('srv/cliente.php?' + params)
+    .then(respuesta => muestraObjeto(forma, respuesta.body))
+    .catch(muestraError);
+}">
+
+    <form id="forma" onsubmit="submitForm('srv/cliente-modifica.php', event)
+        .then(respuesta => location.href = 'index-clientes.html')
+        .catch(muestraError)">
+
+        <h1>Modificar Cliente</h1>
+
+        <p><a href="index-clientes.html">Cancelar</a></p>
+
+        <input name="id" type="hidden">
+
+        <p>
+            <label>Nombre *<input name="nombre" value="Cargando&hellip;"></label>
+        </p>
+
+        <p>
+            <label>Email *<input name="email" value="Cargando&hellip;"></label>
+        </p>
+
+        <p>
+            <label>Teléfono *<input name="telefono" value="Cargando&hellip;"></label>
+        </p>
+
+        <p>
+            <label>Dirección *<input name="direccion" value="Cargando&hellip;"></label>
+        </p>
+
+        <p>* Obligatorio</p>
+
+        <p><button type="submit">Guardar</button>
+
+            <button type="button" onclick="
+                if (params.size > 0 && confirm('Confirma la eliminación')) {
+                    consumeJson('srv/cliente-elimina.php?' + params)
+                        .then(() => location.href = 'index-clientes.html')
+                        .catch(muestraError);
+                }">
+                Eliminar
+            </button>
+        </p>
+
+    </form>
+
+</body>
+
+</html>
